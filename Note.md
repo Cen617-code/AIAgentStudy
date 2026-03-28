@@ -87,3 +87,5 @@ The code examples using LangChain and Google ADK demonstrate two different, yet 
 Mastering the Routing pattern is essential for building agents that can intelligently navigate different scenarios and provide tailored responses or actions based on context. It’s a key component in creating versatile and robust agentic applications.
 
 掌握路由模式对于构建能够智能地导航不同场景并根据上下文提供定制响应或操作的智能体至关重要。它是创建多功能和健壮智能体应用程序的关键组件。
+
+# Chapter 3: Parallelization
