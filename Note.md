@@ -1,3 +1,7 @@
+```
+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
+```
+
 # Chapter 1: Prompt Chaining
 
 ## At a Glance
@@ -53,7 +57,7 @@ By deconstructing complex problems into a sequence of simpler, more manageable s
 
 **经验法则：** 当智能体必须根据用户输入或当前状态在多个不同的工作流、工具或子智能体之间做出决策时，使用路由模式。它对于需要对传入请求进行分类以处理不同类型任务的应用程序至关重要，例如客户支持机器人区分销售查询、技术支持和帐户管理问题。
 
-## **Visual Summary:**
+## **Visual Summary**
 
 ![截屏2026-03-27 15.23.08](assets/截屏2026-03-27 15.23.08.png)
 
@@ -89,3 +93,105 @@ Mastering the Routing pattern is essential for building agents that can intellig
 掌握路由模式对于构建能够智能地导航不同场景并根据上下文提供定制响应或操作的智能体至关重要。它是创建多功能和健壮智能体应用程序的关键组件。
 
 # Chapter 3: Parallelization
+
+## At a Glance
+
+**What:** Many agentic workflows involve multiple sub-tasks that must be completed to achieve a final goal. A purely sequential execution, where each task waits for the previous one to finish, is often inefficient and slow. This latency becomes a significant bottleneck when tasks depend on external I/O operations, such as calling different APIs or querying multiple databases. Without a mechanism for concurrent execution, the total processing time is the sum of all individual task durations, hindering the system’s overall performance and responsiveness.
+
+**是什么：** 许多智能体工作流包含多个必须完成才能达成最终目标的子任务。纯顺序执行（每个任务等待前一个完成）通常低效且缓慢。当任务依赖外部 I/O 操作（如调用不同 API 或查询多个数据库）时，这种延迟成为主要瓶颈。若无并发执行机制，总处理时间等于所有单个任务持续时间之和，严重制约系统整体性能和响应能力。
+
+**Why:** The Parallelization pattern provides a standardized solution by enabling the simultaneous execution of independent tasks. It works by identifying components of a workflow, like tool usages or LLM calls, that do not rely on each other’s immediate outputs. Agentic frameworks like LangChain and the Google ADK provide built-in constructs to define and manage these concurrent operations. For instance, a main process can invoke several sub-tasks that run in parallel and wait for all of them to complete before proceeding to the next step. By running these independent tasks at the same time rather than one after another, this pattern drastically reduces the total execution time.
+
+**为什么：** 并行化模式通过启用独立任务的同时执行提供标准化解决方案。该模式通过识别工作流中不依赖彼此即时输出的组件（如工具使用或 LLM 调用）来实现。像 LangChain 和 Google ADK 这样的智能体框架提供内置构造来定义和管理这些并发操作。例如，主进程可调用多个并行运行的子任务，等待所有子任务完成后再继续下一步。通过同时而非顺序执行这些独立任务，该模式显著减少总执行时间。
+
+**Rule of thumb:** Use this pattern when a workflow contains multiple independent operations that can run simultaneously, such as fetching data from several APIs, processing different chunks of data, or generating multiple pieces of content for later synthesis.
+
+**经验法则：** 当工作流包含多个可同时运行的独立操作时使用此模式，例如从多个 API 获取数据、处理不同数据块或生成多个内容片段供后续综合。
+
+## Visual Summary
+
+![截屏2026-03-28 14.26.06](assets/截屏2026-03-28 14.26.06.png)
+
+## Key Takeaways 
+
+- Parallelization is a pattern for executing independent tasks concurrently to improve efficiency.
+- 并行化是一种通过并发执行独立任务来提高效率的模式
+- It is particularly useful when tasks involve waiting for external resources, such as API calls.
+- 在涉及等待外部资源（如 API 调用）的任务中特别有效
+- The adoption of a concurrent or parallel architecture introduces substantial complexity and cost, impacting key development phases such as design, debugging, and system logging.
+- 采用并发或并行架构会引入显著复杂性和成本，影响设计、调试和系统日志等关键开发环节
+- Frameworks like LangChain and Google ADK provide built-in support for defining and managing parallel execution.
+- 像 LangChain 和 Google ADK 这样的框架提供定义和管理并行执行的内置支持
+- In LangChain Expression Language (LCEL), RunnableParallel is a key construct for running multiple runnables side-by-side.
+- 在 LangChain 表达式语言（LCEL）中，RunnableParallel 是并行运行多个可运行对象的关键构造
+- Google ADK can facilitate parallel execution through LLM-Driven Delegation, where a Coordinator agent’s LLM identifies independent sub-tasks and triggers their concurrent handling by specialized sub-agents.
+- Google ADK 可通过 LLM 驱动的委托实现并行执行，协调器智能体的 LLM 识别独立子任务并触发专门子智能体的并发处理
+- Parallelization helps reduce overall latency and makes agentic systems more responsive for complex tasks.
+- 并行化有助于减少整体延迟，使智能体系统在处理复杂任务时更具响应性
+
+## conclusion 
+
+The parallelization pattern is a method for optimizing computational workflows by concurrently executing independent sub-tasks. This approach reduces overall latency, particularly in complex operations that involve multiple model inferences or calls to external services.
+
+并行化模式是通过并发执行独立子任务来优化计算工作流的方法。该模式有效减少整体延迟，在涉及多个模型推理或对外部服务调用的复杂操作中尤为显著。
+
+Frameworks provide distinct mechanisms for implementing this pattern. In LangChain, constructs like RunnableParallel are used to explicitly define and execute multiple processing chains simultaneously. In contrast, frameworks like the Google Agent Developer Kit (ADK) can achieve parallelization through multi-agent delegation, where a primary coordinator model assigns different sub-tasks to specialized agents that can operate concurrently.
+
+不同框架为此模式提供了不同的实现机制。在 LangChain 中，通过 RunnableParallel 等构造显式定义并同时执行多个处理链。而 Google 智能体开发工具包 (ADK) 等框架则通过多智能体委托实现并行化，由主协调器模型将不同子任务分配给可并发操作的专门智能体。
+
+By integrating parallel processing with sequential (chaining) and conditional (routing) control flows, it becomes possible to construct sophisticated, high-performance computational systems capable of efficiently managing diverse and complex tasks.
+
+通过将并行处理与顺序（链式）和条件（路由）控制流相结合，可以构建能够高效管理各类复杂任务的复杂、高性能计算系统。
+
+# Chapter 4: Reflection
+
+## At a Glance
+
+**What:** An agent’s initial output is often suboptimal, suffering from inaccuracies, incompleteness, or a failure to meet complex requirements. Basic agentic workflows lack a built-in process for the agent to recognize and fix its own errors. This is solved by having the agent evaluate its own work or, more robustly, by introducing a separate logical agent to act as a critic, preventing the initial response from being the final one regardless of quality.
+
+**是什么：** 智能体的初始输出往往次优，存在不准确、不完整或未能满足复杂要求的问题。基础智能体工作流缺乏让智能体识别和修复自身错误的内置流程。这通过让智能体评估自身工作，或更稳健地引入独立逻辑智能体充当评审者来解决，防止无论质量如何初始响应都成为最终结果。
+
+**Why:** The Reflection pattern offers a solution by introducing a mechanism for self-correction and refinement. It establishes a feedback loop where a “producer” agent generates an output, and then a “critic” agent (or the producer itself) evaluates it against predefined criteria. This critique is then used to generate an improved version. This iterative process of generation, evaluation, and refinement progressively enhances the quality of the final result, leading to more accurate, coherent, and reliable outcomes.
+
+**为什么：** 反思模式通过引入自我纠正和优化机制提供了解决方案。它建立反馈循环，其中”生产者”智能体生成输出，然后”评审者”智能体（或生产者自身）根据预定义标准进行评估。随后使用此评审生成改进版本。这种生成、评估和优化的迭代过程逐步提升最终结果的质量，从而产生更准确、连贯和可靠的结果。
+
+**Rule of thumb:** Use the Reflection pattern when the quality, accuracy, and detail of the final output are more important than speed and cost. It is particularly effective for tasks like generating polished long-form content, writing and debugging code, and creating detailed plans. Employ a separate critic agent when tasks require high objectivity or specialized evaluation that a generalist producer agent might miss.
+
+**经验法则：** 当最终输出的质量、准确性和细节比速度和成本更重要时使用反思模式。它对生成精炼的长篇内容、编写和调试代码以及创建详细计划等任务特别有效。当任务需要通用生产者智能体可能遗漏的高客观性或专门评估时，使用独立评审者智能体。
+
+## visual Summary
+
+![截屏2026-03-28 16.52.51](assets/截屏2026-03-28 16.52.51.png)
+
+​                                               Fig. 4-1: Reflection design pattern, self-reflection
+
+![截屏2026-03-28 16.53.35](assets/截屏2026-03-28 16.53.35.png)
+
+​                                     Fig.4-2: Reflection design pattern, producer and critique agent
+
+## Key Takeaways 
+
+- The primary advantage of the Reflection pattern is its ability to iteratively self-correct and refine outputs, leading to significantly higher quality, accuracy, and adherence to complex instructions.
+- It involves a feedback loop of execution, evaluation/critique, and refinement. Reflection is essential for tasks requiring high-quality, accurate, or nuanced outputs.
+- A powerful implementation is the Producer-Critic model, where a separate agent (or prompted role) evaluates the initial output. This separation of concerns enhances objectivity and allows for more specialized, structured feedback.
+- However, these benefits come at the cost of increased latency and computational expense, along with a higher risk of exceeding the model’s context window or being throttled by API services.
+- While full iterative reflection often requires stateful workflows (like LangGraph), a single reflection step can be implemented in LangChain using LCEL to pass output for critique and subsequent refinement.
+- Google ADK can facilitate reflection through sequential workflows where one agent’s output is critiqued by another agent, allowing for subsequent refinement steps.
+- This pattern enables agents to perform self-correction and enhance their performance over time.
+- 反思模式的主要优势在于其能够迭代地自我纠正和优化输出，从而显著提高质量、准确性和对复杂指令的遵循度。
+- 它涉及执行、评估/评审和优化的反馈循环。反思对需要高质量、准确或精细输出的任务至关重要。
+- 一个强大的实现是生产者-评审者模型，其中独立智能体（或提示角色）评估初始输出。这种关注点分离增强了客观性，并支持更专业、结构化的反馈。
+- 然而，这些优势是以增加的延迟和计算成本为代价的，同时伴随超出模型上下文窗口或被API服务限制的更高风险。
+- 虽然完整的迭代反思通常需要有状态的工作流（如LangGraph），但单个反思步骤可在LangChain中使用LCEL实现，以将输出传递给评审和后续优化。
+- Google ADK 可通过顺序工作流促进反思，其中一个智能体的输出被另一个智能体评审，允许后续优化步骤。
+- 此模式使智能体执行自我纠正并随时间提升性能。
+
+## Conclusion
+
+The reflection pattern provides a crucial mechanism for self-correction within an agent’s workflow, enabling iterative improvement beyond a single-pass execution. This is achieved by creating a loop where the system generates an output, evaluates it against specific criteria, and then uses that evaluation to produce a refined result. This evaluation can be performed by the agent itself (self-reflection) or, often more effectively, by a distinct critic agent, which represents a key architectural choice within the pattern.
+
+反思模式为智能体工作流中的自我纠正提供了关键机制，实现了超越单次执行的迭代改进。这通过创建一个循环来实现：系统生成输出，根据特定标准评估它，然后使用该评估产生优化结果。这种评估可以由智能体自身执行（自我反思），或者通常更有效地由不同的评审者智能体执行，这代表了模式内的一个关键架构选择。
+
+While a fully autonomous, multi-step reflection process requires a robust architecture for state management, its core principle is effectively demonstrated in a single generate-critique-refine cycle. As a control structure, reflection can be integrated with other foundational patterns to construct more robust and functionally complex agentic systems.
+
+虽然完全自主的多步反思过程需要强大的状态管理架构，但其核心原理在单个生成-评审-优化周期中得到了有效展示。作为一种控制结构，反思可以与其他基础模式集成，以构建更健壮和功能更复杂的智能体系统。
