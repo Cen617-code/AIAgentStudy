@@ -2,9 +2,10 @@
 
 ## 学习任务
 
-- [ ] 完成 Day 1 基础操作学习
-- [ ] 完成 Day 2 Bash 命令学习
-- [ ] 完成 Day 3 Git 协作学习
+- [x] 完成 Day 1 基础操作学习
+- [x] 完成 Day 2 Bash 命令学习
+- [x] 完成 Day 3 Git 协作学习
+- [ ] 完成 Day 4 代码阅读与理解
 
 ## 日常任务
 
@@ -34,3 +35,11 @@ Day 3 学习完成！
 - 学会了 git log 查看提交历史
 - 学会了 git diff 查看文件变更
 - 成功提交了第一个 commit
+
+---
+
+Day 4 学习完成！
+- 学会了用 Read 读取并解释复杂文件
+- 学会了用 Grep 搜索函数定义和调用位置
+- 创建了 task_manager.py 作为练习项目
+- 分析了 TaskManager 和 Task 类的结构
