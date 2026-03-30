@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习笔记</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>我的学习笔记</h1>
+
+        <form action="{{ url_for('add_note') }}" method="post" class="note-form">
+            <textarea name="content" placeholder="写下你的笔记..." required></textarea>
+            <button type="submit">保存笔记</button>
+        </form>
+
+        <div class="notes-list">
+            <h2>笔记列表</h2>
+            {% if notes %}
+                <ul>
+                {% for note in notes %}
+                    <li>{{ note }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty">暂无笔记</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
