@@ -34,6 +34,7 @@ def parse_log_line(line: str) -> dict:
     解析单行日志。
 
     日志格式应为: "timestamp - level - message"
+    支持多级分隔符（如消息本身包含 " - "）
 
     Args:
         line: 日志行字符串
@@ -45,13 +46,19 @@ def parse_log_line(line: str) -> dict:
         >>> parse_log_line("2024-01-01 10:00:00 - INFO - Test message")
         {'timestamp': '2024-01-01 10:00:00', 'level': 'INFO', 'message': 'Test message'}
     """
-    parts = line.strip().split(" - ")
+    # 按 " - " 分隔符分割，限制分割次数为2，保留消息中的分隔符
+    parts = line.strip().split(" - ", 2)
     if len(parts) >= 3:
         return {
             "timestamp": parts[0],
-            "level": parts[1],
-            "message": " - ".join(parts[2:]),
+            "level": parts[1].upper(),
+            "message": parts[2],
         }
+    # 如果格式不标准，尝试简单解析 level
+    upper_line = line.upper()
+    for lvl in ["CRITICAL", "ERROR", "WARN", "WARNING", "INFO", "DEBUG"]:
+        if lvl in upper_line:
+            return {"timestamp": "", "level": lvl, "message": line}
     return {"timestamp": "", "level": "INFO", "message": line}
 
 

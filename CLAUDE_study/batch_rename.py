@@ -75,7 +75,11 @@ def main():
     files = []
     for f in directory.iterdir():
         if f.is_file():
-            if include_pattern.search(f.suffix) and not exclude_pattern.search(f.name):
+            # 检查文件后缀是否匹配 include 模式（需要精确匹配 .xxx 格式）
+            suffix_match = include_pattern.search(f.suffix) if f.suffix else False
+            # 检查文件名是否匹配 exclude 模式
+            exclude_match = exclude_pattern.search(f.name)
+            if suffix_match and not exclude_match:
                 files.append(str(f))
 
     # 按文件名排序

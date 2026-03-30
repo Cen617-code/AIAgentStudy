@@ -4,24 +4,20 @@
 
 from datetime import datetime
 from typing import Optional
+import uuid
 
 
 class Task:
     """任务类"""
 
     def __init__(self, title: str, description: str = "", priority: int = 1):
-        self.id = self._generate_id()
+        self.id = str(uuid.uuid4())[:8]  # 使用 UUID 的前8位确保唯一性
         self.title = title
         self.description = description
         self.priority = priority  # 1-5, 1最高
         self.completed = False
         self.created_at = datetime.now()
         self.completed_at: Optional[datetime] = None
-
-    @staticmethod
-    def _generate_id() -> str:
-        """生成唯一ID"""
-        return datetime.now().strftime("%Y%m%d%H%M%S")
 
 
 class TaskManager:
