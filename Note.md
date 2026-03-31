@@ -1,5 +1,5 @@
 ```
-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
+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
 ```
 
 # Chapter 1: Prompt Chaining
@@ -195,3 +195,48 @@ The reflection pattern provides a crucial mechanism for self-correction within a
 While a fully autonomous, multi-step reflection process requires a robust architecture for state management, its core principle is effectively demonstrated in a single generate-critique-refine cycle. As a control structure, reflection can be integrated with other foundational patterns to construct more robust and functionally complex agentic systems.
 
 虽然完全自主的多步反思过程需要强大的状态管理架构，但其核心原理在单个生成-评审-优化周期中得到了有效展示。作为一种控制结构，反思可以与其他基础模式集成，以构建更健壮和功能更复杂的智能体系统。
+
+# Chapter 5: Tool Use
+
+## At a Glance
+
+**What:** LLMs are powerful text generators, but they are fundamentally disconnected from the outside world. Their knowledge is static, limited to the data they were trained on, and they lack the ability to perform actions or retrieve real-time information. This inherent limitation prevents them from completing tasks that require interaction with external APIs, databases, or services. Without a bridge to these external systems, their utility for solving real-world problems is severely constrained.
+
+**是什么：** 大型语言模型（LLM）是强大的文本生成器，但它们基本上与外部世界断开连接。它们的知识是静态的，仅限于训练数据，并且缺乏执行操作或检索实时信息的能力。这种固有的限制阻止它们完成需要与外部 API、数据库或服务交互的任务。没有通往这些外部系统的桥梁，它们解决现实世界问题的效用受到严重限制。
+
+**Why:** The Tool Use pattern, often implemented via function calling, provides a standardized solution to this problem. It works by describing available external functions, or “tools,” to the LLM in a way it can understand. Based on a user’s request, the agentic LLM can then decide if a tool is needed and generate a structured data object (like a JSON) specifying which function to call and with what arguments. An orchestration layer executes this function call, retrieves the result, and feeds it back to the LLM. This allows the LLM to incorporate up-to-date, external information or the result of an action into its final response, effectively giving it the ability to act.
+
+**为什么：** 工具使用模式（通常通过工具调用实现）为此问题提供了标准化解决方案。它的工作原理是以 LLM 可以理解的方式向其描述可用的外部函数或”工具”。基于用户的请求，智能体 LLM 可以决定是否需要工具，并生成指定要调用哪个函数以及使用什么参数的结构化数据对象（如 JSON）。编排层执行此工具调用，检索结果，并将其反馈给 LLM。这允许 LLM 将最新的外部信息或操作结果合并到其最终响应中，有效地赋予其行动能力。
+
+**Rule of thumb:** Use the Tool Use pattern whenever an agent needs to break out of the LLM’s internal knowledge and interact with the outside world. This is essential for tasks requiring real-time data (e.g., checking weather, stock prices), accessing private or proprietary information (e.g., querying a company’s database), performing precise calculations, executing code, or triggering actions in other systems (e.g., sending an email, controlling smart devices).
+
+**经验法则：** 当智能体需要突破 LLM 的内部知识并与外部世界交互时，使用工具使用模式。这对于需要实时数据（例如，检查天气、股票价格）、访问私有或专有信息（例如，查询公司数据库）、执行精确计算、执行代码或触发其他系统中的操作（例如，发送电子邮件、控制智能设备）的任务至关重要。
+
+## Visual Summary
+
+![截屏2026-04-01 00.55.51](assets/截屏2026-04-01 00.55.51.png)
+
+​                                                              Fig.5-1: Tool use design pattern
+
+## Key Takeaways 
+
+- Tool Use (Function Calling) allows agents to interact with external systems and access dynamic information.
+- It involves defining tools with clear descriptions and parameters that the LLM can understand.
+- The LLM decides when to use a tool and generates structured function calls.
+- Agentic frameworks execute the actual tool calls and return the results to the LLM.
+- Tool Use is essential for building agents that can perform real-world actions and provide up-to-date information.
+- LangChain simplifies tool definition using the @tool decorator and provides create_tool_calling_agent and AgentExecutor for building tool-using agents.
+- Google ADK has a number of very useful pre-built tools such as Google Search, Code Execution and Vertex AI Search Tool.
+- 工具使用（函数调用）允许智能体与外部系统交互并访问动态信息。
+- 它涉及定义具有 LLM 可以理解的清晰描述和参数的工具。
+- LLM 决定何时使用工具并生成结构化工具调用。
+- 智能体框架执行实际的工具调用并将结果返回给 LLM。
+- 工具使用对于构建可以执行现实世界操作并提供最新信息的智能体至关重要。
+- LangChain 使用 @tool 装饰器简化工具定义，并提供 create_tool_calling_agent 和 AgentExecutor 用于构建工具使用智能体。
+- Google ADK 有许多非常有用的预构建工具，如 Google 搜索、代码执行和 Vertex AI 搜索工具。
+
+## Conclusion
+
+The Tool Use pattern is a critical architectural principle for extending the functional scope of large language models beyond their intrinsic text generation capabilities. By equipping a model with the ability to interface with external software and data sources, this paradigm allows an agent to perform actions, execute computations, and retrieve information from other systems. This process involves the model generating a structured request to call an external tool when it determines that doing so is necessary to fulfill a user’s query. Frameworks such as LangChain, Google ADK, and Crew AI offer structured abstractions and components that facilitate the integration of these external tools. These frameworks manage the process of exposing tool specifications to the model and parsing its subsequent tool-use requests. This simplifies the development of sophisticated agentic systems that can interact with and take action within external digital environments.
+
+工具使用模式是将大型语言模型的功能范围扩展到其固有文本生成能力之外的关键架构原则。通过为模型配备与外部软件和数据源交互的能力，此范式允许智能体执行操作、进行计算并从其他系统检索信息。此过程涉及模型在确定满足用户查询需要时生成调用外部工具的结构化请求。LangChain、Google ADK 和 CrewAI 等框架提供结构化抽象和组件，促进这些外部工具的集成。这些框架管理向模型公开工具规范并解析其后续工具使用请求的过程。这简化了可以与外部数字环境交互并在其中采取行动的复杂智能体系统的开发。

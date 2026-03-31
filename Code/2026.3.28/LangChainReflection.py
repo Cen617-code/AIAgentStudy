@@ -8,7 +8,7 @@ try:
     # 使用 ChatOpenAI 并将 base_url 指向 OpenRouter
     llm = ChatOpenAI(
         base_url="https://openrouter.ai/api/v1", 
-        model="minimax/minimax-m2.5:free", 
+        model="z-ai/glm-4.5-air:free", 
         temperature=0,
         default_headers={
             "HTTP-Referer": "https://github.com/Cen617-code/AIAgentStudy", 
