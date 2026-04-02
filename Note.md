@@ -1,7 +1,12 @@
 ```
 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
+```
+
+```
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple 包名
 ```
+
+
 
 # Chapter 1: Prompt Chaining
 
@@ -285,5 +290,88 @@ In conclusion, the Planning pattern is a foundational component that elevates ag
 
 # Chapter 7: Multi-Agent Collaboration
 
+## At a Glance
 
+**What:** Complex problems often exceed the capabilities of a single, monolithic LLM-based agent. A solitary agent may lack the diverse, specialized skills or access to the specific tools needed to address all parts of a multifaceted task. This limitation creates a bottleneck, reducing the system’s overall effectiveness and scalability. As a result, tackling sophisticated, multi-domain objectives becomes inefficient and can lead to incomplete or suboptimal outcomes. **是什么：** 复杂问题通常超出单个单体基于 LLM 的智能体的能力范围。单个智能体往往缺乏解决多方面任务所有部分所需的多样化专业技能或对特定工具的访问。此限制造成瓶颈，降低系统的整体效率和可扩展性。因此，处理复杂的多领域目标变得低效，并可能导致不完整或次优的结果。
 
+**Why:** The Multi-Agent Collaboration pattern offers a standardized solution by creating a system of multiple, cooperating agents. A complex problem is broken down into smaller, more manageable sub-problems. Each sub-problem is then assigned to a specialized agent with the precise tools and capabilities required to solve it. These agents work together through defined communication protocols and interaction models like sequential handoffs, parallel workstreams, or hierarchical delegation. This agentic, distributed approach creates a synergistic effect, allowing the group to achieve outcomes that would be impossible for any single agent. **为什么：** 多智能体协作模式通过创建多个协作智能体的系统提供了标准化解决方案。复杂问题被分解为更小、更易于管理的子问题。然后将每个子问题分配给具有解决它所需的精确工具和能力的专门智能体。这些智能体通过精心设计的通信协议和交互模型（如顺序交接、并行工作流或层次化委托）协同工作。这种模块化的智能体方法创造了协同效应，使团队能够实现任何单个智能体都无法单独实现的成果。
+
+**Rule of thumb:** Use this pattern when a task is too complex for a single agent and can be decomposed into distinct sub-tasks requiring specialized skills or tools. It is ideal for problems that benefit from diverse expertise, parallel processing, or a structured workflow with multiple stages, such as complex research and analysis, software development, or creative content generation. **经验法则：** 当任务对于单个智能体太复杂并且可以分解为需要专业技能或工具的不同子任务时，使用此模式。它非常适合受益于多样化专业知识、并行处理或具有多个阶段的结构化工作流的问题，例如复杂的研究和分析、软件开发或创意内容生成。
+
+![截屏2026-04-02 10.53.31](assets/截屏2026-04-02 10.53.31.png)
+
+​            Fig. 7-1: Agents communicate and interact in various ways. 
+
+![截屏2026-04-02 10.52.00](assets/截屏2026-04-02 10.52.00.png)
+
+​                               Fig.7-2: Multi-Agent design pattern
+
+## Key Takeaways 
+
+- Multi-agent collaboration involves multiple agents working together to achieve a common goal.
+- 多智能体协作涉及多个智能体协同工作以实现共同目标。
+- This pattern leverages specialized roles, distributed tasks, and inter-agent communication.
+- 此模式利用专业角色、分布式任务和智能体间通信。
+- Collaboration can take forms like sequential handoffs, parallel processing, debate, or hierarchical structures.
+- 协作可以采取顺序交接、并行处理、辩论或层次结构等形式。
+- This pattern is ideal for complex problems requiring diverse expertise or multiple distinct stages.
+- 此模式非常适合需要多样化专业知识或多个不同阶段的复杂问题。
+
+## Conclusion
+
+This chapter explored the Multi-Agent Collaboration pattern, demonstrating the benefits of orchestrating multiple specialized agents within systems. We examined various collaboration models, emphasizing the pattern’s essential role in addressing complex, multifaceted problems across diverse domains. Understanding agent collaboration naturally leads to an inquiry into their interactions with the external environment.
+
+本章探讨了多智能体协作模式，展示了在系统内编排多个专门智能体的强大之处。我们研究了各种协作模型，强调该模式在跨不同领域解决复杂多方面问题中的关键作用。理解智能体间的交互自然会引出对其与外部环境交互的探究。
+
+# Chapter 8: Memory Managment
+
+## At a Glance
+
+**What**: Agentic systems need to remember information from past interactions to perform complex tasks and provide coherent experiences. Without a memory mechanism, agents are stateless, unable to maintain conversational context, learn from experience, or personalize responses for users. This fundamentally limits them to simple, one-shot interactions, failing to handle multi-step processes or evolving user needs. The core problem is how to effectively manage both the immediate, temporary information of a single conversation and the vast, persistent knowledge gathered over time.
+
+**是什么：**智能体需要记住过去交互信息以执行复杂任务并提供连贯体验。缺乏记忆机制时，Agent 无法维护对话上下文、从经验中学习或提供个性化响应，被限制在简单的一次性交互中，无法处理多步骤过程或变化需求。核心问题是如何有效管理单个对话的即时临时信息和随时间积累的持久知识。
+
+**Why:** The standardized solution is to implement a dual-component memory system that distinguishes between short-term and long-term storage. Short-term, contextual memory holds recent interaction data within the LLM’s context window to maintain conversational flow. For information that must persist, long-term memory solutions use external databases, often vector stores, for efficient, semantic retrieval. Agentic frameworks like the Google ADK provide specific components to manage this, such as Session for the conversation thread and State for its temporary data. A dedicated MemoryService is used to interface with the long-term knowledge base, allowing the agent to retrieve and incorporate relevant past information into its current context.
+
+**为什么：** 标准化解决方案是实现区分短期和长期存储的双组件记忆系统：短期上下文记忆在 LLM 窗口内保存最近交互以维护对话流；长期记忆使用外部数据库（如向量存储）实现高效的语义检索。Google ADK 等框架提供特定组件来管理此过程（如 Session 管理对话线程，State 处理临时数据）。专用的 MemoryService 与长期知识库交互，允许智能体将相关的过去信息纳入当前上下文。
+
+**Rule of thumb:** Use this pattern when an agent needs to do more than answer a single question. It is essential for agents that must maintain context throughout a conversation, track progress in multi-step tasks, or personalize interactions by recalling user preferences and history. Implement memory management whenever the agent is expected to learn or adapt based on past successes, failures, or newly acquired information.
+
+**经验法则：** 当智能体做更多事情（不仅是回答单个问题）时使用此模式。对于需维护对话上下文、跟踪多步骤任务进度或通过回忆用户偏好历史来提供个性化交互的 Agent，此模式必不可少。当智能体从过去的成功/失败或新信息中学习并适应时，应实现记忆管理。
+
+![截屏2026-04-02 15.18.03](assets/截屏2026-04-02 15.18.03.png)
+
+​                                            Fig.8-1: Memory management design pattern
+
+## Key Takeaways 
+
+- Memory is super important for agents to keep track of things, learn, and personalize interactions.
+- 记忆对于智能体处理事务、学习和个性化交互至关重要。
+- Conversational AI relies on both short-term memory for immediate context within a single chat and long-term memory for persistent knowledge across multiple sessions.
+- 对话式 AI 依赖单个聊天中即时上下文的短期记忆和跨多个会话持久知识的长期记忆。
+- Short-term memory (the immediate stuff) is temporary, often limited by the LLM’s context window or how the framework passes context.
+- 短期记忆（即时信息）是临时的，通常受 LLM 上下文窗口或框架传递上下文方式的限制。
+- Long-term memory (the stuff that sticks around) saves info across different chats using outside storage like vector databases and is accessed by searching.
+- 长期记忆（持久信息）使用向量数据库等外部存储跨不同聊天保存信息，并通过搜索访问。
+- Frameworks like ADK have specific parts like Session (the chat thread), State (temporary chat data), and MemoryService (the searchable long-term knowledge) to manage memory.
+- 像 ADK 这样的框架具有特定部分，如 Session（聊天线程）、State（临时聊天数据）和 MemoryService（可搜索的长期知识）来管理记忆。
+- ADK’s SessionService handles the whole life of a chat session, including its history (events) and temporary data (state).
+- ADK 的 SessionService 处理聊天会话的整个生命周期，包括其历史（events）和临时数据（state）。
+- ADK’s session.state is a dictionary for temporary chat data. Prefixes (user:, app:, temp:) tell you where the data belongs and if it sticks around.
+- ADK 的 session.state 是临时聊天数据的字典。前缀（user:、app:、temp:）指示数据归属位置及是否持久。
+- In ADK, you should update state by using EventActions.state_delta or output_key when adding events, not by changing the state dictionary directly.
+- 在 ADK 中，应通过在添加事件时使用 EventActions.state_delta 或 output_key 更新状态，而非直接更改状态字典。
+- ADK’s MemoryService is for putting info into long-term storage and letting agents search it, often using tools.
+- ADK 的 MemoryService 用于将信息放入长期存储并让智能体检索，通常使用工具。
+- LangChain offers practical tools like ConversationBufferMemory to automatically inject the history of a single conversation into a prompt, enabling an agent to recall immediate context.
+- LangChain 提供如 ConversationBufferMemory 的实用工具，自动将单个对话历史注入提示，使智能体回忆即时上下文。
+- LangGraph enables advanced, long-term memory by using a store to save and retrieve semantic facts, episodic experiences, or even updatable procedural rules across different user sessions.
+- LangGraph 通过使用存储来保存和检索跨不同用户会话的语义事实、情景经验甚至可更新的程序规则，实现高级长期记忆。
+- Memory Bank is a managed service that provides agents with persistent, long-term memory by automatically extracting, storing, and recalling user-specific information to enable personalized, continuous conversations across frameworks like Google’s ADK, LangGraph, and CrewAI.
+- Memory Bank 是托管服务，通过自动提取、存储和调用用户特定信息为智能体提供持久长期记忆，在 Google 的 ADK、LangGraph 和 CrewAI 等框架中实现个性化的持续对话。
+
+## Conclusion
+
+This chapter dove into the really important job of memory management for agent systems, showing the difference between the short-lived context and the knowledge that sticks around for a long time. We talked about how these types of memory are set up and where you see them used in building smarter agents that can remember things. We took a detailed look at how Google ADK gives you specific pieces like Session, State, and MemoryService to handle this. Now that we’ve covered how agents can remember things, both short-term and long-term, we can move on to how they can learn and adapt. The next pattern ”Learning and Adaptation” is about an agent changing how it thinks, acts, or what it knows, all based on new experiences or data.
+
+本章深入探讨智能体记忆管理，展示了短暂上下文与长期持久知识之间的区别。我们讨论了这些记忆类型的设置方式以及在构建更智能智能体中的应用。详细了解了 Google ADK 如何通过 Session、State 和 MemoryService 等组件处理此过程。既然已介绍智能体如何管理记忆（短期和长期），我们将继续探讨其如何学习和适应。下一模式”学习和适应”关注智能体如何根据智能体数据改变思考、行动或知识。
