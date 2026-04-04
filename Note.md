@@ -2,8 +2,12 @@
 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
 ```
 
-```
+```bash
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple 包名
+```
+
+```bash
+export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897
 ```
 
 
@@ -375,3 +379,62 @@ This chapter explored the Multi-Agent Collaboration pattern, demonstrating the b
 This chapter dove into the really important job of memory management for agent systems, showing the difference between the short-lived context and the knowledge that sticks around for a long time. We talked about how these types of memory are set up and where you see them used in building smarter agents that can remember things. We took a detailed look at how Google ADK gives you specific pieces like Session, State, and MemoryService to handle this. Now that we’ve covered how agents can remember things, both short-term and long-term, we can move on to how they can learn and adapt. The next pattern ”Learning and Adaptation” is about an agent changing how it thinks, acts, or what it knows, all based on new experiences or data.
 
 本章深入探讨智能体记忆管理，展示了短暂上下文与长期持久知识之间的区别。我们讨论了这些记忆类型的设置方式以及在构建更智能智能体中的应用。详细了解了 Google ADK 如何通过 Session、State 和 MemoryService 等组件处理此过程。既然已介绍智能体如何管理记忆（短期和长期），我们将继续探讨其如何学习和适应。下一模式”学习和适应”关注智能体如何根据智能体数据改变思考、行动或知识。
+
+# Chapter 9: Learning and Adaptation 
+
+![截屏2026-04-03 11.37.24](assets/截屏2026-04-03 11.37.24.png)
+
+Fig. 9-1: The OpenEvolve internal architecture is managed by a controller. This controller orchestrates several key components: the program sampler, Program Database, Evaluator Pool, and LLM Ensembles. Its primary function is to facilitate their learning and adaptation processes to enhance code quality.
+
+## At a Glance
+
+**What:** AI agents often operate in dynamic and unpredictable environments where pre-programmed logic is insufficient. Their performance can degrade when faced with novel situations not anticipated during their initial design. Without the ability to learn from experience, agents cannot optimize their strategies or personalize their interactions over time. This rigidity limits their effectiveness and prevents them from achieving true autonomy in complex, real-world scenarios.
+
+**是什么：** AI 智能体通常在动态且不可预测的环境中运行，在这些环境中预编程逻辑是不够的。当面对初始设计期间未预料到的新情况时，它们的性能可能会下降。没有从经验中学习的能力，智能体无法随时间优化其策略或个性化其交互。这种刚性限制了它们的有效性，并阻止它们在复杂的现实世界场景中实现真正的自主性。
+
+**Why:** The standardized solution is to integrate learning and adaptation mechanisms, transforming static agents into dynamic, evolving systems. This allows an agent to autonomously refine its knowledge and behaviors based on new data and interactions. Agentic systems can use various methods, from reinforcement learning to more advanced techniques like self-modification, as seen in the Self-Improving Coding Agent (SICA). Advanced systems like Google’s AlphaEvolve leverage LLMs and evolutionary algorithms to discover entirely new and more efficient solutions to complex problems. By continuously learning, agents can master new tasks, enhance their performance, and adapt to changing conditions without requiring constant manual reprogramming.
+
+**为什么：** 标准化解决方案是集成学习和适应机制，将静态智能体转变为动态的、演化的系统。这使智能体能够基于新数据和交互自主改进其知识和行为。智能体系统可以使用各种方法，从强化学习到更高级的技术，如自我改进编码智能体（SICA）中所见的自我修改。像 Google 的 AlphaEvolve 这样的高级系统利用 LLM 和进化算法来发现全新的、更高效的复杂问题解决方案。通过持续学习，智能体可以掌握新任务、增强其性能并适应变化的条件，而无需持续的手动重新编程。
+
+**Rule of thumb:** Use this pattern when building agents that must operate in dynamic, uncertain, or evolving environments. It is essential for applications requiring personalization, continuous performance improvement, and the ability to handle novel situations autonomously.
+
+**经验法则：** 在构建必须在动态、不确定或演化环境中运行的智能体时使用此模式。它对于需要个性化、持续性能改进以及自主处理新情况的能力的应用至关重要。
+
+![截屏2026-04-03 11.38.36](assets/截屏2026-04-03 11.38.36.png)
+
+​                            Fig.9-2: Learning and adapting pattern
+
+## Key Takeaways 
+
+- Learning and Adaptation are about agents getting better at what they do and handling new situations by using their experiences.
+- “Adaptation” is the visible change in an agent’s behavior or knowledge that comes from learning.
+- SICA, the Self-Improving Coding Agent, self-improves by modifying its code based on past performance. This led to tools like the Smart Editor and AST Symbol Locator.
+- Having specialized “sub-agents” and an “overseer” helps these self-improving systems manage big tasks and stay on track.
+- The way an LLM’s “context window” is set up (with system prompts, core prompts, and assistant messages) is super important for how efficiently agents work.
+- This pattern is vital for agents that need to operate in environments that are always changing, uncertain, or require a personal touch.
+- Building agents that learn often means hooking them up with machine learning tools and managing how data flows.
+- An agent system, equipped with basic coding tools, can autonomously edit itself, and thereby improve its performance on benchmark tasks
+- AlphaEvolve is Google’s AI agent that leverages LLMs and an evolutionary framework to autonomously discover and optimize algorithms, significantly enhancing both fundamental research and practical computing applications.
+- 学习和适应是智能体通过经验改进自身行为并处理新情况的过程
+- “适应”是学习导致的智能体行为或知识的可见变化
+- 自我改进编码智能体（SICA）通过基于过去表现修改代码进行自我改进，产生了智能编辑器、AST 符号定位器等工具
+- 拥有专门的”子智能体”和”监督者”有助于这些自我改进系统管理大型任务并保持正轨
+- LLM 上下文窗口的设置方式（使用系统提示词、核心提示词和助手消息）对智能体的工作效率至关重要
+- 此模式对于需要在不断变化、不确定或需要个性化的环境中运行的智能体至关重要
+- 构建学习型智能体通常意味着将它们与机器学习工具连接起来并管理数据流动方式
+- 配备基本编码工具的智能体系统可以自主编辑自身，从而提高其在基准任务上的性能
+- AlphaEvolve 是 Google 的 AI 智能体，利用 LLM 和进化框架自主发现和优化算法，显著增强基础研究和实际计算应用
+
+## Conclusion
+
+This chapter examines the crucial roles of learning and adaptation in Artificial Intelligence. AI agents enhance their performance through continuous data acquisition and experience. The Self-Improving Coding Agent (SICA) exemplifies this by autonomously improving its capabilities through code modifications.
+
+本章探讨了学习和适应在人工智能中的关键作用。AI 智能体通过持续的数据获取和经验来增强其性能。自我改进编码智能体（SICA）通过代码修改自主改进其能力，很好地例证了这一点。
+
+We have reviewed the fundamental components of agentic AI, including architecture, applications, planning, multi-agent collaboration, memory management, and learning and adaptation. Learning principles are particularly vital for coordinated improvement in multi-agent systems. To achieve this, tuning data must accurately reflect the complete interaction trajectory, capturing the individual inputs and outputs of each participating agent.
+
+我们已经回顾了智能体 AI 的基本组成部分，包括架构、应用、规划、多智能体协作、记忆管理以及学习和适应。学习原理对于多智能体系统的协调改进特别重要。要实现这一点，调优数据必须准确反映完整的交互轨迹，捕获每个参与智能体的输入和输出。
+
+These elements contribute to significant advancements, such as Google’s AlphaEvolve. This AI system independently discovers and refines algorithms by LLMs, automated assessment, and an evolutionary approach, driving progress in scientific research and computational techniques. Such patterns can be combined to construct sophisticated AI systems. Developments like AlphaEvolve demonstrate that autonomous algorithmic discovery and optimization by AI agents are attainable.
+
+这些元素促成了重大进展，如 Google 的 AlphaEvolve。这个 AI 系统通过 LLM、自动化评估和进化方法独立发现和改进算法，推动科学研究和计算技术的进步。这些模式可以组合起来构建复杂的 AI 系统。像 AlphaEvolve 这样的发展表明，AI 智能体自主算法发现和优化是可以实现的。
