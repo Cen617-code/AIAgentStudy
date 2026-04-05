@@ -1,17 +1,3 @@
-```
-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
-```
-
-```bash
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple 包名
-```
-
-```bash
-export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897
-```
-
-
-
 # Chapter 1: Prompt Chaining
 
 ## At a Glance
