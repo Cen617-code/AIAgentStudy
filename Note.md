@@ -438,3 +438,161 @@ We have reviewed the fundamental components of agentic AI, including architectur
 These elements contribute to significant advancements, such as Google’s AlphaEvolve. This AI system independently discovers and refines algorithms by LLMs, automated assessment, and an evolutionary approach, driving progress in scientific research and computational techniques. Such patterns can be combined to construct sophisticated AI systems. Developments like AlphaEvolve demonstrate that autonomous algorithmic discovery and optimization by AI agents are attainable.
 
 这些元素促成了重大进展，如 Google 的 AlphaEvolve。这个 AI 系统通过 LLM、自动化评估和进化方法独立发现和改进算法，推动科学研究和计算技术的进步。这些模式可以组合起来构建复杂的 AI 系统。像 AlphaEvolve 这样的发展表明，AI 智能体自主算法发现和优化是可以实现的。
+
+# Chapter 10: Model Context Protocl 
+
+## At a Glance
+
+**What:** To function as effective agents, LLMs must move beyond simple text generation. They require the ability to interact with the external environment to access current data and utilize external software. Without a standardized communication method, each integration between an LLM and an external tool or data source becomes a custom, complex, and non-reusable effort. This ad-hoc approach hinders scalability and makes building complex, interconnected AI systems difficult and inefficient.
+
+**是什么**：要作为有效的智能体，LLM 必须超越简单的文本生成。它们需要与外部环境交互的能力，以访问当前数据并使用外部软件。如果没有标准化的通信方法，LLM 与外部工具或数据源之间的每次集成都将成为定制、复杂且不可重用的工作。这种临时方法阻碍了可扩展性，并使构建复杂、互联的 AI 系统变得困难且低效。
+
+**Why:** The Model Context Protocol (MCP) offers a standardized solution by acting as a universal interface between LLMs and external systems. It establishes an open, standardized protocol that defines how external capabilities are discovered and used. Operating on a client-server model, MCP allows servers to expose tools, data resources, and interactive prompts to any compliant client. LLM-powered applications act as these clients, dynamically discovering and interacting with available resources in a predictable manner. This standardized approach fosters an ecosystem of interoperable and reusable components, dramatically simplifying the development of complex agentic workflows.
+
+**为什么**：模型上下文协议（MCP）通过充当 LLM 和外部系统之间的通用接口，提供了标准化的解决方案。它建立了一个开放的标准化协议，定义了如何发现和使用外部能力。基于客户端-服务器模型运行，MCP 允许服务器向任何兼容的客户端公开工具、数据资源和交互式提示。LLM 驱动的应用程序充当这些客户端，以可预测的方式动态发现和与可用资源交互。这种标准化方法促进了可互操作和可重用组件的生态系统，显著简化了复杂智能体工作流的开发。
+
+**Rule of thumb:** Use the Model Context Protocol (MCP) when building complex, scalable, or enterprise-grade agentic systems that need to interact with a diverse and evolving set of external tools, data sources, and APIs. It is ideal when interoperability between different LLMs and tools is a priority, and when agents require the ability to dynamically discover new capabilities without being redeployed. For simpler applications with a fixed and limited number of predefined functions, direct tool function calling may be sufficient.
+
+**经验法则**：在构建需要与各种不断发展的外部工具、数据源和 API 交互的复杂、可扩展或企业级智能体系统时，使用模型上下文协议（MCP）。当不同 LLM 和工具之间的互操作性是优先考虑事项时，以及当智能体需要动态发现新能力而无需重新部署时，它是理想选择。对于具有固定有限数量预定义函数的简单应用程序，直接工具函数调用可能就足够了。
+
+![截屏2026-04-05 10.56.23](assets/截屏2026-04-05 10.56.23.png)
+
+## Key Takeaways 
+
+- The Model Context Protocol (MCP) is an open standard facilitating standardized communication between LLMs and external applications, data sources, and tools.
+- 模型上下文协议（MCP）是一个开放标准，促进 LLM 与外部应用程序、数据源和工具之间的标准化通信。
+- It employs a client-server architecture, defining the methods for exposing and consuming resources, prompts, and tools.
+- 它采用客户端-服务器架构，定义了公开和使用资源、提示和工具的方法。
+- The Agent Development Kit (ADK) supports both utilizing existing MCP servers and exposing ADK tools via an MCP server.
+- 智能体开发工具包（ADK）支持使用现有 MCP 服务器以及通过 MCP 服务器公开 ADK 工具。
+- FastMCP simplifies the development and management of MCP servers, particularly for exposing tools implemented in Python.
+- FastMCP 简化了 MCP 服务器的开发和管理，特别是用于公开在 Python 中实现的工具。
+- MCP Tools for Genmedia Services allows agents to integrate with Google Cloud’s generative media capabilities (Imagen, Veo, Chirp 3 HD, Lyria).
+- 生成媒体服务的 MCP 工具允许智能体与 Google Cloud 的生成媒体能力（Imagen、Veo、Chirp 3 HD、Lyria）集成。
+- MCP enables LLMs and agents to interact with real-world systems, access dynamic information, and perform actions beyond text generation.
+- MCP 使 LLM 和智能体能够与现实世界系统交互，访问动态信息，并执行超越文本生成的操作。
+
+## Conclusion
+
+The Model Context Protocol (MCP) is an open standard that facilitates communication between Large Language Models (LLMs) and external systems. It employs a client-server architecture, enabling LLMs to access resources, utilize prompts, and execute actions through standardized tools. MCP allows LLMs to interact with databases, manage generative media workflows, control IoT devices, and automate financial services. Practical examples demonstrate setting up agents to communicate with MCP servers, including filesystem servers and servers built with FastMCP, illustrating its integration with the Agent Development Kit (ADK). MCP is a key component for developing interactive AI agents that extend beyond basic language capabilities.
+
+模型上下文协议（MCP）是一个开放标准，促进大型语言模型（LLM）与外部系统之间的通信。它采用客户端-服务器架构，使 LLM 能够通过标准化工具访问资源、使用提示和执行操作。MCP 允许 LLM 与数据库交互、管理生成媒体工作流、控制物联网设备以及自动化金融服务。实际示例演示了设置智能体与 MCP 服务器通信的方法，包括文件系统服务器和使用 FastMCP 构建的服务器，说明了其与智能体开发工具包（ADK）的集成。MCP 是开发超越基本语言能力的交互式 AI 智能体的关键组件。
+
+# Chapter 11: Goal Setting and Monitoring
+
+## At a Glance
+
+**What**: AI agents often lack a clear direction, preventing them from acting with purpose beyond simple, reactive tasks. Without defined objectives, they cannot independently tackle complex, multi-step problems or orchestrate sophisticated workflows. Furthermore, there is no inherent mechanism for them to determine if their actions are leading to a successful outcome. This limits their autonomy and prevents them from being truly effective in dynamic, real-world scenarios where mere task execution is insufficient.
+
+**问题背景**：AI 智能体通常缺乏明确的方向，阻碍了它们在简单反应性任务之外采取有目的的行动。如果没有定义的目标，它们无法独立处理复杂的多步骤问题或编排复杂的工作流。此外，它们没有内在的机制来确定其行动是否导致成功的结果。这限制了它们的自主性，并阻止它们在仅执行任务不足的动态现实世界场景中真正有效。
+
+**Why**: The Goal Setting and Monitoring pattern provides a standardized solution by embedding a sense of purpose and self-assessment into agentic systems. It involves explicitly defining clear, measurable objectives for the agent to achieve. Concurrently, it establishes a monitoring mechanism that continuously tracks the agent’s progress and the state of its environment against these goals. This creates a crucial feedback loop, enabling the agent to assess its performance, correct its course, and adapt its plan if it deviates from the path to success. By implementing this pattern, developers can transform simple reactive agents into proactive, goal-oriented systems capable of autonomous and reliable operation.
+
+**解决方案**：目标设定与监控模式通过将目的感和自我评估嵌入智能体系统来提供标准化的解决方案。它涉及为智能体明确定义清晰、可衡量的目标。同时，它建立了一个监控机制，持续跟踪智能体的进度和环境状态，并与这些目标进行对比。这创建了一个关键的反馈循环，使智能体能够评估其表现、纠正其路线，并在偏离成功之路时调整其计划。通过实施此模式，开发人员可以将简单的反应智能体转变为能够自主可靠运行的主动的、以目标为导向的系统。
+
+**Rule of thumb**: Use this pattern when an AI agent must autonomously execute a multi-step task, adapt to dynamic conditions, and reliably achieve a specific, high-level objective without constant human intervention.
+
+**实践建议**：当 AI 智能体需要自主执行多步骤任务、适应动态条件并在没有持续人工干预的情况下可靠地实现特定的高级目标时，使用此模式。
+
+![截屏2026-04-05 12.12.11](assets/截屏2026-04-05 12.12.11.png)
+
+## Key Takeaways 
+
+Key takeaways include: 关键要点包括：
+
+- Goal Setting and Monitoring equips agents with purpose and mechanisms to track progress.
+- Goals should be specific, measurable, achievable, relevant, and time-bound (SMART).
+- Clearly defining metrics and success criteria is essential for effective monitoring.
+- Monitoring involves observing agent actions, environmental states, and tool outputs.
+- Feedback loops from monitoring allow agents to adapt, revise plans, or escalate issues.
+- In Google’s ADK, goals are often conveyed through agent instructions, with monitoring accomplished through state management and tool interactions.
+- 目标设定与监控为智能体配备了目的感和跟踪进度的机制。
+- 目标应该是具体的、可衡量的、可实现的、相关的和有时限的（SMART）。
+- 清楚地定义指标和成功标准对于有效监控至关重要。
+- 监控涉及观察智能体的行动、环境状态和工具输出。
+- 来自监控的反馈循环允许智能体适应、修订计划或升级问题。
+- 在 Google 的 ADK 中，目标通常通过智能体指令传达，监控通过状态管理和工具交互完成。
+
+## Conclusion
+
+This chapter focused on the crucial paradigm of Goal Setting and Monitoring. I highlighted how this concept transforms AI agents from merely reactive systems into proactive, goal-driven entities. The text emphasized the importance of defining clear, measurable objectives and establishing rigorous monitoring procedures to track progress. Practical applications demonstrated how this paradigm supports reliable autonomous operation across various domains, including customer service and robotics. A conceptual coding example illustrates the implementation of these principles within a structured framework, using agent directives and state management to guide and evaluate an agent’s achievement of its specified goals. Ultimately, equipping agents with the ability to formulate and oversee goals is a fundamental step toward building truly intelligent and accountable AI systems.
+
+本章重点介绍了目标设定与监控的关键范式。我们强调了这个概念如何将 AI 智能体从仅是反应系统转变为主动的、以目标为驱动的实体。文本强调了定义清晰、可衡量的目标以及建立严格的监控程序来跟踪进度的重要性。实际应用展示了这个范式如何支持在各个领域（包括客户服务和机器人）的可靠自主运行。一个概念性的编码示例说明了这些原则在结构化框架内的实现，使用智能体指令和状态管理来指导和评估智能体对指定目标的实现。最终，为智能体配备制定和监督目标的能力是构建真正智能和负责任的 AI 系统的基本步骤。
+
+# Chapter 12: Exception Handing and Recovery
+
+## At a Glance
+
+**What:** AI agents operating in real-world environments inevitably encounter unforeseen situations, errors, and system malfunctions. These disruptions can range from tool failures and network issues to invalid data, threatening the agent’s ability to complete its tasks. Without a structured way to manage these problems, agents can be fragile, unreliable, and prone to complete failure when faced with unexpected hurdles. This unreliability makes it difficult to deploy them in critical or complex applications where consistent performance is essential.
+
+**问题背景**：在现实世界环境中运行的 AI 智能体不可避免地会遇到不可预见的情况、错误和系统故障。这些中断可能从工具故障、网络问题到无效数据不等，威胁着智能体完成任务的能力。如果没有结构化的方法来管理这些问题，智能体可能会变得脆弱、不可靠，并且在面对意外障碍时容易完全失败。这种不可靠性使得难以在一致性能至关重要的关键或复杂应用程序中部署它们。
+
+**Why**: The Exception Handling and Recovery pattern provides a standardized solution for building robust and resilient AI agents. It equips them with the agentic capability to anticipate, manage, and recover from operational failures. The pattern involves proactive error detection, such as monitoring tool outputs and API responses, and reactive handling strategies like logging for diagnostics, retrying transient failures, or using fallback mechanisms. For more severe issues, it defines recovery protocols, including reverting to a stable state, self-correction by adjusting its plan, or escalating the problem to a human operator. This systematic approach ensures agents can maintain operational integrity, learn from failures, and function dependably in unpredictable settings.
+
+**解决方案**：异常处理和恢复模式为构建强大和有弹性的 AI 智能体提供了标准化的解决方案。它为它们配备了预测、管理和从操作失败中恢复的智能体能力。此模式涉及主动错误检测，例如监控工具输出和 API 响应，以及响应处理策略，如用于诊断的日志记录、重试瞬态故障或使用回退机制。对于更严重的问题，它定义了恢复协议，包括恢复到稳定状态、通过调整其计划进行自我纠正或将问题升级给人类操作员。这种系统方法确保智能体保持操作完整性，从失败中学习，并在不可预测的环境中可靠地运作。
+
+**Rule of thumb:** Use this pattern for any AI agent deployed in a dynamic, real-world environment where system failures, tool errors, network issues, or unpredictable inputs are possible and operational reliability is a key requirement.
+
+**实践建议**：对于在动态的现实世界环境中部署的任何 AI 智能体，当系统故障、工具错误、网络问题或不可预测的输入可能发生且操作可靠性是关键要求时，使用此模式。
+
+![截屏2026-04-05 13.44.48](assets/截屏2026-04-05 13.44.48.png)
+
+## Key Takeaways 
+
+- Exception Handling and Recovery is essential for building robust and reliable Agents.
+- 异常处理和恢复对于构建强大和可靠的智能体非常重要。
+- This pattern involves detecting errors, handling them gracefully, and implementing strategies to recover.
+- 此模式涉及检测错误、优雅地处理错误以及实施恢复策略。
+- Error detection can involve validating tool outputs, checking API error codes, and using timeouts.
+- 错误检测可能涉及验证工具输出、检查 API 错误代码以及使用超时。
+- Handling strategies include logging, retries, fallbacks, graceful degradation, and notifications.
+- 处理策略包括日志记录、重试、回退、优雅降级和通知。
+- Recovery focuses on restoring stable operation through diagnosis, self-correction, or escalation.
+- 恢复侧重于通过诊断、自我纠正或升级恢复稳定运行。
+- This pattern ensures agents can operate effectively even in unpredictable real-world environments.
+- 此模式确保智能体在不可预测的现实世界环境中也能有效运行。
+
+## Conclusion
+
+This chapter explores the Exception Handling and Recovery pattern, which is essential for developing robust and dependable AI agents. This pattern addresses how AI agents can identify and manage unexpected issues, implement appropriate responses, and recover to a stable operational state. The chapter discusses various aspects of this pattern, including the detection of errors, the handling of these errors through mechanisms such as logging, retries, and fallbacks, and the strategies used to restore the agent or system to proper function. Practical applications of the Exception Handling and Recovery pattern are illustrated across several domains to demonstrate its relevance in handling real-world complexities and potential failures. These applications show how equipping AI agents with exception handling capabilities contributes to their reliability and adaptability in dynamic environments.
+
+本章探讨了异常处理和恢复模式，这对于开发强大和可靠的 AI 智能体非常重要。此模式解决了 AI 智能体如何识别和管理意外问题、实施适当的响应以及恢复到稳定操作状态的需求。本章讨论了此模式的各个方面，包括错误的检测、通过日志记录、重试和回退等机制处理这些错误，以及用于将智能体或系统恢复到正常功能的策略。异常处理和恢复模式的实际应用在多个领域中得到说明，展示了其在处理现实世界复杂性和潜在失败方面的相关性。这些应用展示了为 AI 智能体配备异常处理能力如何有助于它们在动态环境中的可靠性和适应性。
+
+# Chapter 13: Human-in-the-loop
+
+**What:** AI systems, including advanced LLMs, often struggle with tasks that require nuanced judgment, ethical reasoning, or a deep understanding of complex, ambiguous contexts. Deploying fully autonomous AI in high-stakes environments carries significant risks, as errors can lead to severe safety, financial, or ethical consequences. These systems lack the inherent creativity and common-sense reasoning that humans possess. Consequently, relying solely on automation in critical decision-making processes is often imprudent and can undermine the system’s overall effectiveness and trustworthiness.
+
+**问题背景：** AI 系统（包括高级 LLM）通常在需要细致入微判断、道德推理或对复杂模糊上下文深刻理解的任务中表现不佳。在高风险环境中部署完全自主的 AI 具有重大风险，因为错误可能导致严重的安全、财务或道德后果。这些系统缺乏人类固有的创造力和常识推理能力。因此，在关键决策过程中仅依赖自动化通常是不明智的，并可能损害系统的整体有效性和可信度。
+
+**Why:** The Human-in-the-Loop (HITL) pattern provides a standardized solution by strategically integrating human oversight into AI workflows. This agentic approach creates a symbiotic partnership where AI handles computational heavy-lifting and data processing, while humans provide critical validation, feedback, and intervention. By doing so, HITL ensures that AI actions align with human values and safety protocols. This collaborative framework not only mitigates the risks of full automation but also enhances the system’s capabilities through continuous learning from human input. Ultimately, this leads to more robust, accurate, and ethical outcomes that neither human nor AI could achieve alone.
+
+**解决方案：** 人机协同（HITL）模式通过战略性地将人类监督整合到 AI 工作流中提供了标准化解决方案。这种智能体方法创建了共生伙伴关系，AI 处理计算繁重工作和数据处理，而人类提供关键验证、反馈和干预。通过这样做，HITL 确保 AI 行动与人类价值观和安全协议保持一致。这种协作框架不仅降低了完全自动化的风险，还通过从人类输入中持续学习来增强系统能力。最终，这带来了更强大、准确和道德的结果，这些结果是人类或 AI 单独无法实现的。
+
+**Rule of thumb:** Use this pattern when deploying AI in domains where errors have significant safety, ethical, or financial consequences, such as in healthcare, finance, or autonomous systems. It is essential for tasks involving ambiguity and nuance that LLMs cannot reliably handle, like content moderation or complex customer support escalations. Employ HITL when the goal is to continuously improve an AI model with high-quality, human-labeled data or to refine generative AI outputs to meet specific quality standards.
+
+**实践建议：** 在部署 AI 到错误会产生重大安全、道德或财务后果的领域时使用此模式，例如医疗保健、金融或自主系统。对于涉及 LLM 无法可靠处理的模糊性和细微差别的任务（如内容审核或复杂客户支持升级），它至关重要。当目标是使用高质量人类标注数据持续改进 AI 模型或完善生成 AI 输出以满足特定质量标准时，采用 HITL。
+
+![截屏2026-04-05 13.57.48](assets/截屏2026-04-05 13.57.48.png)
+
+## Key Takeaways
+
+- Human-in-the-Loop (HITL) integrates human intelligence and judgment into AI workflows.
+- 人机协同（HITL）将人类智能和判断整合到 AI 工作流中。
+- It’s crucial for safety, ethics, and effectiveness in complex or high-stakes scenarios.
+- 它在复杂或高风险场景中对安全性、道德和有效性至关重要。
+- Key aspects include human oversight, intervention, feedback for learning, and decision augmentation.
+- 关键方面包括人类监督、干预、学习反馈和决策增强。
+- Escalation policies are essential for agents to know when to hand off to a human.
+- 升级策略对于智能体何时交接给人类至关重要。
+- HITL allows for responsible AI deployment and continuous improvement.
+- HITL 允许负责任的 AI 部署和持续改进。
+- The primary drawbacks of Human-in-the-Loop are its inherent lack of scalability, creating a trade-off between accuracy and volume, and its dependence on highly skilled domain experts for effective intervention.
+- 人机协同的主要缺点是其固有的可扩展性不足，在准确性和数量之间造成权衡，以及对高技能领域专家进行有效干预的依赖性。
+- Its implementation presents operational challenges, including the need to train human operators for data generation and to address privacy concerns by anonymizing sensitive information.
+- 其实施带来了操作挑战，包括需要培训人类操作员进行数据生成，以及通过匿名化敏感信息来解决隐私问题。
+
+## Conclusion
+
+This chapter explored the vital Human-in-the-Loop (HITL) pattern, emphasizing its role in creating robust, safe, and ethical AI systems. We discussed how integrating human oversight, intervention, and feedback into agent workflows can significantly enhance their performance and trustworthiness, especially in complex and sensitive domains. The practical applications demonstrated HITL’s widespread utility, from content moderation and medical diagnosis to autonomous driving and customer support. The conceptual code example provided a glimpse into how ADK can facilitate these human-agent interactions through escalation mechanisms. As AI capabilities continue to advance, HITL remains a cornerstone for responsible AI development, ensuring that human values and expertise remain central to intelligent system design.
+
+本章探讨了至关重要的人机协同（HITL）模式，强调了其在创建强大、安全和道德的 AI 系统中的作用。我们讨论了如何将人类监督、干预和反馈整合到智能体工作流中可以显著增强其性能和可信度，特别是在复杂和敏感的领域中。实际应用展示了 HITL 的广泛实用性，从内容审核和医疗诊断到自动驾驶和客户支持。概念性代码示例提供了 ADK 如何通过升级机制促进这些人机交互的一瞥。随着 AI 能力不断进步，HITL 仍然是负责任的 AI 开发的基石，确保人类价值观和专业知识在智能系统设计中保持核心地位。
